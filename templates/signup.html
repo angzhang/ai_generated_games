@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Create account - Free Games{% endblock %}
+
+{% block content %}
+    <h1>Create account</h1>
+    <p class="subtitle">to get started with Free Games</p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'successful' in message.lower() %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% else %}
+                    <div class="alert alert-error">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="{{ username or '' }}" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ email or '' }}" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password">
+            <div class="help-text">
+                Password must be 8-128 characters and include: uppercase letter, lowercase letter, number, and special character (!@#$%^&*(),.?":{}|<>)
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Create account</button>
+    </form>
+
+    <div class="divider">
+        <span>or</span>
+    </div>
+
+    <div class="links">
+        <a href="{{ url_for('login') }}">Already have an account? Sign in</a>
+    </div>
+{% endblock %}

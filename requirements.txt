@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+PyMySQL
+Werkzeug
+cryptography
+pytest
+pytest-flask
+pytest-cov 

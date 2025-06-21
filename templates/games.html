@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+
+{% block title %}Games - Free Games{% endblock %}
+
+{% block content %}
+    <style>
+        .games-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .games-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 24px;
+            background: linear-gradient(135deg, #1a73e8 0%, #4285f4 50%, #1976d2 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 115, 232, 0.3);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dadce0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .game-card-header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .sky-fighter-header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+        }
+        
+        .tetris-header {
+            background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #9c27b0 100%);
+        }
+        
+        .battle-city-header {
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 50%, #43a047 100%);
+        }
+        
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .game-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .game-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 4px 0 0 0;
+        }
+        
+        .game-content {
+            padding: 24px;
+        }
+        
+        .game-description {
+            color: #5f6368;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .game-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        
+        .game-features li {
+            padding: 4px 0;
+            color: #5f6368;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .game-features li::before {
+            content: '✓';
+            color: #34a853;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .play-button {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .sky-fighter-button {
+            background: #8B4513;
+        }
+        
+        .sky-fighter-button:hover {
+            background: #A0522D;
+            transform: translateY(-1px);
+        }
+        
+        .tetris-button {
+            background: #4a148c;
+        }
+        
+        .tetris-button:hover {
+            background: #6a1b9a;
+            transform: translateY(-1px);
+        }
+        
+        .battle-city-button {
+            background: #2e7d32;
+        }
+        
+        .battle-city-button:hover {
+            background: #388e3c;
+            transform: translateY(-1px);
+        }
+        
+        .stats-section {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .stat-item {
+            padding: 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #5f6368;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <div class="games-container">
+        <div class="games-header">
+            <h1 style="margin: 0; font-size: 32px;">🎮 Free Games Library</h1>
+            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 18px;">Play unlimited games for free! Choose your adventure below.</p>
+        </div>
+        
+        <div class="games-grid">
+            <!-- Sky Fighter 1942 -->
+            <div class="game-card" onclick="window.location.href='{{ url_for('sky_fighter') }}'">
+                <div class="game-card-header sky-fighter-header">
+                    <div class="game-icon">✈️</div>
+                    <h2 class="game-title">Sky Fighter 1942</h2>
+                    <p class="game-subtitle">WWII Pacific Theater Combat</p>
+                </div>
+                <div class="game-content">
+                    <p class="game-description">
+                        Take control of a P-40 Warhawk fighter and defend the Pacific! Battle waves of enemy aircraft including Zeros, Kates, and Vals. Face epic boss battles with legendary aircraft commanders.
+                    </p>
+                    <ul class="game-features">
+                        <li>Authentic WWII aircraft and combat</li>
+                        <li>Epic boss fights with unique patterns</li>
+                        <li>Unlimited lives with health system</li>
+                        <li>Progressive difficulty and power-ups</li>
+                        <li>Realistic aircraft designs and movements</li>
+                    </ul>
+                    <a href="{{ url_for('sky_fighter') }}" class="play-button sky-fighter-button">
+                        🚀 Start Mission
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tetris -->
+            <div class="game-card" onclick="window.location.href='{{ url_for('tetris') }}'">
+                <div class="game-card-header tetris-header">
+                    <div class="game-icon">🧩</div>
+                    <h2 class="game-title">Tetris</h2>
+                    <p class="game-subtitle">Classic Block Puzzle Game</p>
+                </div>
+                <div class="game-content">
+                    <p class="game-description">
+                        The timeless puzzle game that started it all! Drop and arrange falling blocks to create complete lines. Master the art of Tetris with all seven classic pieces.
+                    </p>
+                    <ul class="game-features">
+                        <li>Classic Tetris gameplay mechanics</li>
+                        <li>All 7 original Tetromino pieces</li>
+                        <li>Progressive speed and difficulty</li>
+                        <li>Line clearing and scoring system</li>
+                        <li>Next piece preview</li>
+                    </ul>
+                    <a href="{{ url_for('tetris') }}" class="play-button tetris-button">
+                        🎮 Start Game
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Battle City -->
+            <div class="game-card" onclick="window.location.href='{{ url_for('battle_city') }}'">
+                <div class="game-card-header battle-city-header">
+                    <div class="game-icon">🚗</div>
+                    <h2 class="game-title">Battle City</h2>
+                    <p class="game-subtitle">Classic Tank Warfare Game</p>
+                </div>
+                <div class="game-content">
+                    <p class="game-description">
+                        Command your battle tank and defend your base! Navigate through destructible walls, engage enemy tanks, and use strategy to protect your headquarters from invasion.
+                    </p>
+                    <ul class="game-features">
+                        <li>Classic tank combat gameplay</li>
+                        <li>Destructible wall environments</li>
+                        <li>Smart enemy AI patterns</li>
+                        <li>Base defense objectives</li>
+                        <li>Progressive levels and challenges</li>
+                    </ul>
+                    <a href="{{ url_for('battle_city') }}" class="play-button battle-city-button">
+                        🎯 Start Battle
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gaming Stats Section -->
+        <div class="stats-section">
+            <h3 style="margin: 0 0 8px 0; color: #202124; font-size: 20px;">🏆 Gaming Platform Stats</h3>
+            <p style="margin: 0; color: #5f6368; font-size: 14px;">Join thousands of players enjoying free games!</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Games Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Free to Play</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always Online</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Browser Based</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Navigation -->
+        <div style="text-align: center; margin-top: 32px; padding: 24px; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);">
+            <h3 style="margin: 0 0 16px 0; color: #202124; font-size: 18px;">🎯 Quick Actions</h3>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="{{ url_for('profile') }}" class="btn btn-secondary" style="text-decoration: none;">
+                    👤 View Profile
+                </a>
+                <a href="{{ url_for('change_password') }}" class="btn btn-secondary" style="text-decoration: none;">
+                    🔒 Change Password
+                </a>
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary" style="text-decoration: none;">
+                    🚪 Sign Out
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click animation to game cards
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS animation for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Prevent card click when clicking buttons
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+{% endblock %}

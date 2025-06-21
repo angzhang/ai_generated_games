@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Free Games{% endblock %}
+
+{% block content %}
+    <h1>User Profile</h1>
+    <p class="subtitle">Your account information and settings</p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'successful' in message.lower() or 'changed' in message.lower() %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% else %}
+                    <div class="alert alert-error">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- User Information Card -->
+    <div style="background: #f8f9fa; padding: 24px; border-radius: 8px; margin-bottom: 24px; border-left: 4px solid #1a73e8;">
+        <h3 style="margin: 0 0 16px 0; font-size: 18px; color: #202124; display: flex; align-items: center;">
+            <span style="margin-right: 8px;">👤</span> Account Information
+        </h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div>
+                <label style="font-weight: 500; color: #5f6368; font-size: 14px;">Username</label>
+                <div style="background: white; padding: 12px; border-radius: 4px; border: 1px solid #dadce0; margin-top: 4px;">
+                    <strong>{{ user.username }}</strong>
+                </div>
+            </div>
+            
+            <div>
+                <label style="font-weight: 500; color: #5f6368; font-size: 14px;">Email</label>
+                <div style="background: white; padding: 12px; border-radius: 4px; border: 1px solid #dadce0; margin-top: 4px;">
+                    <strong>{{ user.email }}</strong>
+                </div>
+            </div>
+        </div>
+        
+        {% if user.password_last_changed %}
+        <div>
+            <label style="font-weight: 500; color: #5f6368; font-size: 14px;">Password Last Changed</label>
+            <div style="background: white; padding: 12px; border-radius: 4px; border: 1px solid #dadce0; margin-top: 4px;">
+                {{ user.password_last_changed.strftime('%B %d, %Y at %I:%M %p') }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Account Security Section -->
+    <div style="background: #e8f0fe; padding: 24px; border-radius: 8px; margin-bottom: 24px; border-left: 4px solid #1967d2;">
+        <h3 style="margin: 0 0 12px 0; font-size: 18px; color: #1967d2; display: flex; align-items: center;">
+            <span style="margin-right: 8px;">🔐</span> Security Settings
+        </h3>
+        <p style="margin: 0 0 16px 0; color: #1967d2; font-size: 14px;">
+            Keep your account secure by regularly updating your password
+        </p>
+        
+        <a href="{{ url_for('change_password') }}" class="btn" style="display: inline-block; text-decoration: none; margin-bottom: 12px;">
+            Change Password
+        </a>
+        
+        <div style="background: rgba(255,255,255,0.8); padding: 12px; border-radius: 4px; font-size: 13px; color: #1967d2;">
+            <strong>Security Features Active:</strong><br>
+            ✓ Strong password policy enforcement<br>
+            ✓ Password history tracking (prevents reuse of last 5 passwords)<br>
+            ✓ Account lockout protection after failed attempts<br>
+            ✓ Secure password hashing (PBKDF2 with 260,000 iterations)
+        </div>
+    </div>
+
+    <!-- Game Stats Section -->
+    <div style="background: #e6f4ea; padding: 24px; border-radius: 8px; margin-bottom: 24px; border-left: 4px solid #137333;">
+        <h3 style="margin: 0 0 12px 0; font-size: 18px; color: #137333; display: flex; align-items: center;">
+            <span style="margin-right: 8px;">🎮</span> Free Games
+        </h3>
+        <p style="margin: 0 0 16px 0; color: #137333; font-size: 14px;">
+            Enjoy unlimited free gaming! Choose from our collection of classic games!
+        </p>
+        
+        <a href="{{ url_for('games') }}" class="btn" style="display: inline-block; text-decoration: none; background: #137333; margin-bottom: 12px;">
+            🎮 Browse Game Library
+        </a>
+        
+        <div style="background: rgba(255,255,255,0.8); padding: 12px; border-radius: 4px; font-size: 13px; color: #137333;">
+            <strong>Free Games Library:</strong><br>
+            ✈️ Sky Fighter 1942 - Classic WWII arcade shooter<br>
+            🧩 Tetris - Timeless block puzzle game<br>
+            🚗 Battle City - Tank warfare strategy<br>
+            🎯 All games feature unlimited play and no ads!
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
+        <a href="{{ url_for('games') }}" class="btn btn-secondary" style="text-decoration: none;">
+            🎮 Play Games
+        </a>
+        <a href="{{ url_for('change_password') }}" class="btn btn-secondary" style="text-decoration: none;">
+            🔒 Change Password
+        </a>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary" style="text-decoration: none;">
+            🚪 Sign Out
+        </a>
+    </div>
+{% endblock %}
